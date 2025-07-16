@@ -28,7 +28,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Bazel
-        uses: bazel-contrib/setup-bazel@0.13.0
+        uses: bazel-contrib/setup-bazel@0.15.0
         with:
           module-root: ${{ matrix.module-root }}
           bazelisk-cache: true
@@ -36,16 +36,7 @@ jobs:
           repository-cache: true
       - name: Build
         run: |
-          bazelisk run -c opt --curses=no --noshow_progress //:install_release_binaries -- --destdir="${{ runner.temp }}/binaries"
-      - name: List binaries
-        id: list-binaries
-        # Set the "binaries" output to a json-encoded list of the bazel build
-        # outputs, relative to `--destdir`. (e.g.
-        # ["agg_core/container.tar","ledger/binary"])
-        run: |
-          set -euxo pipefail
-          binaries="$(find "${{ runner.temp }}/binaries" -type f -printf '%P\n' | jq -Rsc 'split("\n")[:-1]')"
-          echo "binaries=${binaries}" >> "$GITHUB_OUTPUT"
+          cd "${{ matrix.module-root }}" && bazelisk run -c opt --curses=no --noshow_progress //:install_release_binaries -- --destdir="${{ runner.temp }}/binaries"
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
