@@ -35,7 +35,7 @@ jobs:
         with:
           module-root: ${{ matrix.module-root }}
           bazelisk-cache: true
-          disk-cache: ${{ github.workflow }}_${{ matrix.module-root }}
+          disk-cache: ${{ github.workflow }}-${{ matrix.module-root }}
           repository-cache: true
       - name: Build
         run: |
@@ -52,7 +52,7 @@ jobs:
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
-          name: binaries
+          name: binaries-${{ matrix.module-root }}
           path: ${{ runner.temp }}/binaries/
           if-no-files-found: error
           retention-days: 5
@@ -76,7 +76,9 @@ jobs:
       - name: Download binaries
         uses: actions/download-artifact@v4
         with:
-          name: binaries
+          pattern: binaries-*
+          merge-multiple: true
+
       - name: Attest
         id: attest
         uses: actions/attest-build-provenance@v1
