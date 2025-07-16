@@ -50,10 +50,12 @@ platform(
 # destination directory.
 _RELEASE_BINARIES = {
     # keep-sorted start
-    "//containers/fed_sql:oci_runtime_bundle.tar": "fed_sql/container.tar",
-    "//containers/kms:oci_runtime_bundle.tar": "kms/container.tar",
-    "//ledger_enclave_app": "ledger/binary",
-    "//replicated_ledger_enclave_app": "replicated_ledger/binary",
+    "//:BUILD": "test1/BUILD",
+    "//:WORKSPACE": "test2/WORKSPACE",
+    #"//containers/fed_sql:oci_runtime_bundle.tar": "fed_sql/container.tar",
+    #"//containers/kms:oci_runtime_bundle.tar": "kms/container.tar",
+    #"//ledger_enclave_app": "ledger/binary",
+    #"//replicated_ledger_enclave_app": "replicated_ledger/binary",
     # keep-sorted end
 }
 

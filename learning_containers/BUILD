@@ -34,9 +34,10 @@ compile_pip_requirements(
 # destination directory.
 _RELEASE_BINARIES = {
     # keep-sorted start
-    "//program_executor_tee:oci_runtime_bundle.tar": "program_executor_tee/container.tar",
-    "//program_worker:oci_runtime_bundle.tar": "program_worker/container.tar",
-    "//tff_server:oci_runtime_bundle.tar": "tff_server/container.tar",
+    "//:BUILD": "test3/BUILD",
+    #"//program_executor_tee:oci_runtime_bundle.tar": "program_executor_tee/container.tar",
+    #"//program_worker:oci_runtime_bundle.tar": "program_worker/container.tar",
+    #"//tff_server:oci_runtime_bundle.tar": "tff_server/container.tar",
     # keep-sorted end
 }
 

@@ -19,14 +19,23 @@ jobs:
 
     runs-on: large-4cpu-16gbRAM-150gbSSD-ubuntu24.04
 
+    strategy:
+      # Continue with other builds even if one fails.
+      fail-fast: false
+      matrix:
+        module-root:
+          - .
+          - learning_containers
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Bazel
         uses: bazel-contrib/setup-bazel@0.13.0
         with:
+          module-root: ${{ matrix.module-root }}
           bazelisk-cache: true
-          disk-cache: ${{ github.workflow }}
+          disk-cache: ${{ github.workflow }}_${{ matrix.module-root }}
           repository-cache: true
       - name: Build
         run: |
