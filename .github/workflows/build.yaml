@@ -51,7 +51,7 @@ jobs:
     outputs:
       binaries: ${{ steps.list.outputs.binaries }}
 
-    permissions:
+    permissions: {}
 
     runs-on: ubuntu-latest
 
